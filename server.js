@@ -113,6 +113,12 @@ function processRequest(req, res) {
         delete req.headers["origin"];
         delete req.headers["referer"];
 
+        // Set bimay referer
+        res.setHeader("referer", "https://binusmaya.binus.ac.id");
+
+        // Set proper cookie
+        res.setHeader("cookie", req.headers["bisquit"]);
+
         var proxyRequest = request({
             url: remoteURL,
             headers: req.headers,
