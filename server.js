@@ -112,12 +112,19 @@ function processRequest(req, res) {
         // Remove origin and referer headers. TODO: This is a bit naughty, we should remove at some point.
         delete req.headers["origin"];
         delete req.headers["referer"];
+        delete req.headers["cookie"];
+
+        // Hehehe... sorry IT div!
 
         // Set bimay referer
-        res.setHeader("referer", "https://binusmaya.binus.ac.id");
+        req.headers["referer"] = "https://binusmaya.binus.ac.id";
 
         // Set proper cookie
-        res.setHeader("cookie", req.headers["bisquit"]);
+        req.headers["cookie"] = req.headers["bisquit"];
+
+        delete req.headers["bisquit"];
+
+        console.log(req.headers);
 
         var proxyRequest = request({
             url: remoteURL,
