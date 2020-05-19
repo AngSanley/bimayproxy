@@ -36,6 +36,9 @@ function addCORSHeaders(req, res) {
     else {
         res.setHeader("Access-Control-Allow-Origin", "*");
     }
+
+    // Allow credentials
+    res.setHeader("Access-Control-Allow-Credentials", 'true');
 }
 
 function writeResponse(res, httpCode, body) {
