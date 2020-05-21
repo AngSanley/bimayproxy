@@ -112,11 +112,6 @@ function processRequest(req, res) {
         // Remove origin and referer headers. TODO: This is a bit naughty, we should remove at some point.
         delete req.headers["origin"];
         delete req.headers["referer"];
-        
-        // Check if cookie is undefined
-        if (req.headers["cookie"] == null) {
-            req.headers["cookie"] = '';
-        }
 
         // Hehehe... sorry IT div!
 
@@ -124,7 +119,10 @@ function processRequest(req, res) {
         req.headers["referer"] = "https://binusmaya.binus.ac.id";
 
         // Set proper cookie
-        req.headers["cookie"] = req.headers["bisquit"];
+        // Check if bisquit is undefined
+        if (req.headers["bisquit"] != null) {
+            req.headers["cookie"] = req.headers["bisquit"];
+        }
 
         delete req.headers["bisquit"];
 
